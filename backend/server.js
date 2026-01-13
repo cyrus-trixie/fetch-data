@@ -4,25 +4,28 @@ import cors from 'cors';
 const app = express();
 const PORT = 4000;
 
-// Data (Your "Database")
-const users = [
+app.use(cors());
+app.use(express.json()); 
+
+// my "Small Database"
+let users = [
     { id: 1, name: 'John Doe' },
     { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Cyrus Ngugi' }
 ];
 
-app.use(cors());
-app.use(express.json()); // Good habit: allows your server to read JSON sent from React
-
-// The Endpoint
+// Route to get all users
 app.get('/users', (req, res) => {
-    res.json(users); // Sends the actual array as JSON
+    res.json(users);
 });
 
-app.listen(PORT, (error) => {
-    if (!error) {
-        console.log(`Server is running on port ${PORT}`);
-    } else {
-        console.error("Server failed to start:", error);
-    }
+// Route to add a new user
+app.post('/users', (req, res) => {
+    const newUser = {
+        id: users.length + 1,
+        name: req.body.name 
+    };
+    users.push(newUser);
+    res.status(201).json(newUser);
 });
+
+app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
