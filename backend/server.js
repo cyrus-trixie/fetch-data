@@ -1,31 +1,32 @@
 import express from 'express';
 import cors from 'cors';
+import CyrusDB from './CyrusDB.js';
 
 const app = express();
-const PORT = 4000;
+const db = new CyrusDB();
 
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 
-// my "Small Database"
-let users = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-];
+// Initialize the table rules (Schema)
+db.createTable('users', { 
+    name: 'string' 
+});
 
-// Route to get all users
+app.post('/users', (req, res) => {
+    try {
+        // req.body is what comes from your React form
+        const newUser = db.insert('users', req.body);
+        res.status(201).json(newUser);
+    } catch (error) {
+        // This catches the "Schema Validation" error we wrote
+        res.status(400).json({ error: error.message });
+    }
+});
+
 app.get('/users', (req, res) => {
+    const users = db.select('users');
     res.json(users);
 });
 
-// Route to add a new user
-app.post('/users', (req, res) => {
-    const newUser = {
-        id: users.length + 1,
-        name: req.body.name 
-    };
-    users.push(newUser);
-    res.status(201).json(newUser);
-});
-
-app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
+app.listen(4000, () => console.log("Server running on port 4000"));
