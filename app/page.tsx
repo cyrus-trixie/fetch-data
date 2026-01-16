@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-// Define the shape of your data
+
 interface User {
   id: number;
   name: string;
@@ -40,8 +40,8 @@ export default function Home() {
 
       if (res.ok) {
         setName("");     
-        await fetchData(); // Refresh local list
-        setView("check");  // Switch view
+        await fetchData(); 
+        setView("check");  
       } else {
         const err = await res.json();
         alert(err.error);
@@ -51,7 +51,6 @@ export default function Home() {
     }
   };
 
-  // 3. Delete user (Delete)
   const deleteUser = async (id: number) => {
     if (!confirm("Are you sure you want to delete this record?")) return;
 
@@ -61,14 +60,14 @@ export default function Home() {
       });
 
       if (res.ok) {
-        fetchData(); // Refresh list after deletion
+        fetchData(); 
       }
     } catch (error) {
       console.error("Delete failed:", error);
     }
   };
 
-  // Auto-fetch when checking directory
+  
   useEffect(() => {
     if (view === "check" || view === "delete") {
       fetchData();

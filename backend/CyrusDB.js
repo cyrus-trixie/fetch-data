@@ -4,7 +4,7 @@ import path from 'node:path';
 class CyrusDB {
     constructor(dbDir = './data') {
         this.dbDir = dbDir;
-        // Create the data folder if it doesn't exist
+        // it Create the data folder if it doesn't exist
         if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir);
     }
 
@@ -21,7 +21,7 @@ class CyrusDB {
         }
     }
 
-    // VALIDATE: Ensures data matches the schema types
+    // VALIDATE: Ensuring data matches the schema types
     validate(data, schema) {
         for (const key in schema) {
             if (data[key] === undefined) {
@@ -33,19 +33,19 @@ class CyrusDB {
         }
     }
 
-    // INSERT: Add a new row with automatic ID generation
+    
     insert(tableName, data) {
         const filePath = path.join(this.dbDir, `${tableName}.json`);
         const table = JSON.parse(fs.readFileSync(filePath));
         
-        // FIX: Ensure rows exists to avoid .length error
+    
         if (!table.rows) {
             table.rows = [];
         }
 
         this.validate(data, table.schema);
 
-        // Safer ID generation: find max ID or start at 1
+    
         const newId = table.rows.length > 0 
             ? Math.max(...table.rows.map(r => r.id)) + 1 
             : 1;
@@ -73,7 +73,7 @@ class CyrusDB {
         if (!table.rows) return { success: false };
 
         const initialCount = table.rows.length;
-        // Ensure ID is treated as a number for comparison
+    
         table.rows = table.rows.filter(row => row.id !== parseInt(id));
 
         if (table.rows.length === initialCount) {

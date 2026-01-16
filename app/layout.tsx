@@ -26,9 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        /* This attribute prevents extensions like ColorZilla or Grammarly 
-           from causing hydration mismatch errors.
-        */
+       
         suppressHydrationWarning={true}
       >
         {children}
