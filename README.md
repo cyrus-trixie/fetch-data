@@ -1,10 +1,10 @@
-# 🚀 CyrusDB Engine & Explorer
+#  CyrusDB Engine & Explorer
 
 A custom-built **Relational Database Management System (RDBMS)** and management dashboard. This project demonstrates the ability to engineer a storage engine from the ground up using Node.js file persistence, schema validation, and relational logic.
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 CyrusDB is designed with a clear separation between the storage engine and the interface:
 
@@ -16,15 +16,15 @@ CyrusDB is designed with a clear separation between the storage engine and the i
 
 ---
 
-## ✨ Key Engineering Features
+##  Key Engineering Features
 
-### 🔐 Schema Validation (The Gatekeeper)
+### Schema Validation (The Gatekeeper)
 Unlike standard JSON storage, CyrusDB enforces strict data typing. If the schema expects a `string` and receives a `number`, the engine rejects the transaction to prevent data corruption.
 
-### 🔗 Relational Mapping (Inner Join)
+###  Relational Mapping (Inner Join)
 The engine includes a custom `innerJoin` algorithm that allows linking different tables (e.g., linking `Tasks` to `Users`) using Primary and Foreign keys.
 
-### 💾 Persistence & CRUD
+### Persistence & CRUD
 Data is stored in physical `.json` files within the `/data` directory.
 - **Create**: Auto-generates unique IDs and validates against the schema.
 - **Read**: Fast retrieval of table rows.
@@ -34,7 +34,7 @@ Data is stored in physical `.json` files within the `/data` directory.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 | :--- | :--- |
@@ -45,7 +45,7 @@ Data is stored in physical `.json` files within the `/data` directory.
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Prerequisites
 Ensure you have **Node.js** installed on your machine.
@@ -55,3 +55,4 @@ Ensure you have **Node.js** installed on your machine.
 cd backend
 npm install
 node server.js
+
