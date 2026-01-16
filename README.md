@@ -1,37 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 CyrusDB Engine & Explorer
 
-## Getting Started
+A custom-built **Relational Database Management System (RDBMS)** and management dashboard. This project demonstrates the ability to engineer a storage engine from the ground up using Node.js file persistence, schema validation, and relational logic.
 
-First, run the development server:
+---
 
+## 🏗️ System Architecture
+
+CyrusDB is designed with a clear separation between the storage engine and the interface:
+
+- **The Engine (`CyrusDB.js`)**: A custom JavaScript class that manages physical file I/O, auto-increments IDs, and enforces data integrity.
+- **The API (`server.js`)**: An Express.js layer that handles HTTP requests and bridges the frontend to the database engine.
+- **The Dashboard (`Next.js`)**: A professional, dark-themed UI built with Tailwind CSS for real-time data management.
+
+
+
+---
+
+## ✨ Key Engineering Features
+
+### 🔐 Schema Validation (The Gatekeeper)
+Unlike standard JSON storage, CyrusDB enforces strict data typing. If the schema expects a `string` and receives a `number`, the engine rejects the transaction to prevent data corruption.
+
+### 🔗 Relational Mapping (Inner Join)
+The engine includes a custom `innerJoin` algorithm that allows linking different tables (e.g., linking `Tasks` to `Users`) using Primary and Foreign keys.
+
+### 💾 Persistence & CRUD
+Data is stored in physical `.json` files within the `/data` directory.
+- **Create**: Auto-generates unique IDs and validates against the schema.
+- **Read**: Fast retrieval of table rows.
+- **Delete**: Defensive filtering to remove records without affecting file structure.
+
+
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | Next.js 15 (App Router), TypeScript, Tailwind CSS |
+| **Backend** | Node.js, Express.js |
+| **Storage** | Custom File-System Engine (CyrusDB) |
+| **Styling** | Geist Sans, Lucide React |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Ensure you have **Node.js** installed on your machine.
+
+### 2. Setup the Backend
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# fetch-data" 
+cd backend
+npm install
+node server.js
