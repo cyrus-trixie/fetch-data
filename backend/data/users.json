@@ -1,1 +1,15 @@
-[]
+{
+  "schema": {
+    "name": "string"
+  },
+  "rows": [
+    {
+      "id": 1,
+      "name": "mark"
+    },
+    {
+      "id": 2,
+      "name": "moses"
+    }
+  ]
+}
